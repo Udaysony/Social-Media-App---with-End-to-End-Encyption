@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MlaDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Group_Invitation_Table">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username_from" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="username_to" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="groupid" Type="Int32" Nullable="false" />
+    <Property Name="groupname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isFriend" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Group_Status_Table" Relationship="Self.FK_GroupInvitation_GroupStatus" FromRole="Group_Invitation_Table" ToRole="Group_Status_Table" />
+    <NavigationProperty Name="User" Relationship="Self.FK1_groupInvitation_user" FromRole="Group_Invitation_Table" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="Self.FK2_groupInvitation_user" FromRole="Group_Invitation_Table" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Group_Key_Table">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="groupKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="groupid" Type="Int32" Nullable="false" />
+    <Property Name="version_num" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group_Status_Table" Relationship="Self.FK_GroupKey_GroupStatus" FromRole="Group_Key_Table" ToRole="Group_Status_Table" />
+    <NavigationProperty Name="User" Relationship="Self.FK_groupKey_user" FromRole="Group_Key_Table" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Group_Status_Table">
+    <Key>
+      <PropertyRef Name="groupid" />
+    </Key>
+    <Property Name="groupid" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="groupname" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Group_Invitation_Table" Relationship="Self.FK_GroupInvitation_GroupStatus" FromRole="Group_Status_Table" ToRole="Group_Invitation_Table" />
+    <NavigationProperty Name="Group_Key_Table" Relationship="Self.FK_GroupKey_GroupStatus" FromRole="Group_Status_Table" ToRole="Group_Key_Table" />
+    <NavigationProperty Name="Group_Table" Relationship="Self.FK_Group_GroupStatus" FromRole="Group_Status_Table" ToRole="Group_Table" />
+    <NavigationProperty Name="Post_Table" Relationship="Self.FK_Post_GroupStatus" FromRole="Group_Status_Table" ToRole="Post_Table" />
+  </EntityType>
+  <EntityType Name="Group_Table">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="groupid" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="groupid" Type="Int32" Nullable="false" />
+    <Property Name="groupname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isOwner" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isFriend" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Group_Status_Table" Relationship="Self.FK_Group_GroupStatus" FromRole="Group_Table" ToRole="Group_Status_Table" />
+    <NavigationProperty Name="User" Relationship="Self.FK_group_user" FromRole="Group_Table" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Post_Table">
+    <Key>
+      <PropertyRef Name="postid" />
+    </Key>
+    <Property Name="postid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="post" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sessionKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="digitalSignature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="groupid" Type="Int32" Nullable="false" />
+    <Property Name="version_num" Type="Int32" Nullable="false" />
+    <Property Name="privacy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ownerusername" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="originalpostid" Type="Int32" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Group_Status_Table" Relationship="Self.FK_Post_GroupStatus" FromRole="Post_Table" ToRole="Group_Status_Table" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Post_User" FromRole="Post_Table" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="emailid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="publickey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Group_Invitation_Table" Relationship="Self.FK1_groupInvitation_user" FromRole="Users" ToRole="Group_Invitation_Table" />
+    <NavigationProperty Name="Group_Invitation_Table1" Relationship="Self.FK2_groupInvitation_user" FromRole="Users" ToRole="Group_Invitation_Table" />
+    <NavigationProperty Name="Group_Key_Table" Relationship="Self.FK_groupKey_user" FromRole="Users" ToRole="Group_Key_Table" />
+    <NavigationProperty Name="Group_Table" Relationship="Self.FK_group_user" FromRole="Users" ToRole="Group_Table" />
+    <NavigationProperty Name="Post_Table" Relationship="Self.FK_Post_User" FromRole="Users" ToRole="Post_Table" />
+  </EntityType>
+  <Association Name="FK_GroupInvitation_GroupStatus">
+    <End Role="Group_Status_Table" Type="Self.Group_Status_Table" Multiplicity="1" />
+    <End Role="Group_Invitation_Table" Type="Self.Group_Invitation_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_Status_Table">
+        <PropertyRef Name="groupid" />
+      </Principal>
+      <Dependent Role="Group_Invitation_Table">
+        <PropertyRef Name="groupid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK1_groupInvitation_user">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Group_Invitation_Table" Type="Self.Group_Invitation_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Group_Invitation_Table">
+        <PropertyRef Name="username_from" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK2_groupInvitation_user">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Group_Invitation_Table" Type="Self.Group_Invitation_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Group_Invitation_Table">
+        <PropertyRef Name="username_to" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupKey_GroupStatus">
+    <End Role="Group_Status_Table" Type="Self.Group_Status_Table" Multiplicity="1" />
+    <End Role="Group_Key_Table" Type="Self.Group_Key_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_Status_Table">
+        <PropertyRef Name="groupid" />
+      </Principal>
+      <Dependent Role="Group_Key_Table">
+        <PropertyRef Name="groupid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_groupKey_user">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Group_Key_Table" Type="Self.Group_Key_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Group_Key_Table">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_GroupStatus">
+    <End Role="Group_Status_Table" Type="Self.Group_Status_Table" Multiplicity="1" />
+    <End Role="Group_Table" Type="Self.Group_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_Status_Table">
+        <PropertyRef Name="groupid" />
+      </Principal>
+      <Dependent Role="Group_Table">
+        <PropertyRef Name="groupid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_GroupStatus">
+    <End Role="Group_Status_Table" Type="Self.Group_Status_Table" Multiplicity="1" />
+    <End Role="Post_Table" Type="Self.Post_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_Status_Table">
+        <PropertyRef Name="groupid" />
+      </Principal>
+      <Dependent Role="Post_Table">
+        <PropertyRef Name="groupid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_group_user">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Group_Table" Type="Self.Group_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Group_Table">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_User">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Post_Table" Type="Self.Post_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Post_Table">
+        <PropertyRef Name="ownerusername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MlaDatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Group_Invitation_Table" EntityType="Self.Group_Invitation_Table" />
+    <EntitySet Name="Group_Key_Table" EntityType="Self.Group_Key_Table" />
+    <EntitySet Name="Group_Status_Table" EntityType="Self.Group_Status_Table" />
+    <EntitySet Name="Group_Table" EntityType="Self.Group_Table" />
+    <EntitySet Name="Post_Table" EntityType="Self.Post_Table" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_GroupInvitation_GroupStatus" Association="Self.FK_GroupInvitation_GroupStatus">
+      <End Role="Group_Status_Table" EntitySet="Group_Status_Table" />
+      <End Role="Group_Invitation_Table" EntitySet="Group_Invitation_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK1_groupInvitation_user" Association="Self.FK1_groupInvitation_user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Group_Invitation_Table" EntitySet="Group_Invitation_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK2_groupInvitation_user" Association="Self.FK2_groupInvitation_user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Group_Invitation_Table" EntitySet="Group_Invitation_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupKey_GroupStatus" Association="Self.FK_GroupKey_GroupStatus">
+      <End Role="Group_Status_Table" EntitySet="Group_Status_Table" />
+      <End Role="Group_Key_Table" EntitySet="Group_Key_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_groupKey_user" Association="Self.FK_groupKey_user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Group_Key_Table" EntitySet="Group_Key_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_GroupStatus" Association="Self.FK_Group_GroupStatus">
+      <End Role="Group_Status_Table" EntitySet="Group_Status_Table" />
+      <End Role="Group_Table" EntitySet="Group_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_GroupStatus" Association="Self.FK_Post_GroupStatus">
+      <End Role="Group_Status_Table" EntitySet="Group_Status_Table" />
+      <End Role="Post_Table" EntitySet="Post_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_group_user" Association="Self.FK_group_user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Group_Table" EntitySet="Group_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_User" Association="Self.FK_Post_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Post_Table" EntitySet="Post_Table" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

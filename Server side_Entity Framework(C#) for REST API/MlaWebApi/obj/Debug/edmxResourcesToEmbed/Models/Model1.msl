@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MlaDatabaseModelStoreContainer" CdmEntityContainer="MlaDatabaseEntities">
+    <EntitySetMapping Name="Group_Invitation_Table">
+      <EntityTypeMapping TypeName="MlaDatabaseModel.Group_Invitation_Table">
+        <MappingFragment StoreEntitySet="Group_Invitation_Table">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username_from" ColumnName="username_from" />
+          <ScalarProperty Name="username_to" ColumnName="username_to" />
+          <ScalarProperty Name="groupid" ColumnName="groupid" />
+          <ScalarProperty Name="groupname" ColumnName="groupname" />
+          <ScalarProperty Name="isFriend" ColumnName="isFriend" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group_Key_Table">
+      <EntityTypeMapping TypeName="MlaDatabaseModel.Group_Key_Table">
+        <MappingFragment StoreEntitySet="Group_Key_Table">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="groupKey" ColumnName="groupKey" />
+          <ScalarProperty Name="groupid" ColumnName="groupid" />
+          <ScalarProperty Name="version_num" ColumnName="version_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group_Status_Table">
+      <EntityTypeMapping TypeName="MlaDatabaseModel.Group_Status_Table">
+        <MappingFragment StoreEntitySet="Group_Status_Table">
+          <ScalarProperty Name="groupid" ColumnName="groupid" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group_Table">
+      <EntityTypeMapping TypeName="MlaDatabaseModel.Group_Table">
+        <MappingFragment StoreEntitySet="Group_Table">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="groupid" ColumnName="groupid" />
+          <ScalarProperty Name="groupname" ColumnName="groupname" />
+          <ScalarProperty Name="isOwner" ColumnName="isOwner" />
+          <ScalarProperty Name="isFriend" ColumnName="isFriend" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Post_Table">
+      <EntityTypeMapping TypeName="MlaDatabaseModel.Post_Table">
+        <MappingFragment StoreEntitySet="Post_Table">
+          <ScalarProperty Name="postid" ColumnName="postid" />
+          <ScalarProperty Name="post" ColumnName="post" />
+          <ScalarProperty Name="sessionKey" ColumnName="sessionKey" />
+          <ScalarProperty Name="digitalSignature" ColumnName="digitalSignature" />
+          <ScalarProperty Name="groupid" ColumnName="groupid" />
+          <ScalarProperty Name="version_num" ColumnName="version_num" />
+          <ScalarProperty Name="privacy" ColumnName="privacy" />
+          <ScalarProperty Name="ownerusername" ColumnName="ownerusername" />
+          <ScalarProperty Name="originalpostid" ColumnName="originalpostid" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="MlaDatabaseModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="emailid" ColumnName="emailid" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="publickey" ColumnName="publickey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

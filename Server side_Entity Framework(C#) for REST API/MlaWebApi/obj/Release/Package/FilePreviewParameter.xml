@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site/MlaWebApi" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\jinso\\Desktop\\MLA-FinalVersion\\MlaWebApi\\MlaWebApi\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\jinso\\Desktop\\MLA-FinalVersion\\MlaWebApi\\MlaWebApi\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="Default Web Site/MlaWebApi/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\jinso\\Desktop\\MLA-FinalVersion\\MlaWebApi\\MlaWebApi\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="MlaDatabase-Web.config Connection String" description="" value="Data Source=|DataDirectory|MlaDatabase.sdf" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\jinso\\Desktop\\MLA-FinalVersion\\MlaWebApi\\MlaWebApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MlaDatabase']/@connectionString" />
+  </parameter>
+</parameters>

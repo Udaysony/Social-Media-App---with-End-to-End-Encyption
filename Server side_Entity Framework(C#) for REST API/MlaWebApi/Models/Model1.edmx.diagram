@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7c9048624b274c33811a0b00152eb528" Name="Diagram1">
+        <EntityTypeShape EntityType="MlaDatabaseModel.Group_Invitation_Table" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MlaDatabaseModel.Group_Key_Table" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MlaDatabaseModel.Group_Status_Table" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MlaDatabaseModel.Group_Table" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MlaDatabaseModel.Post_Table" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MlaDatabaseModel.User" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="MlaDatabaseModel.FK_GroupInvitation_GroupStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK1_groupInvitation_user" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK2_groupInvitation_user" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK_GroupKey_GroupStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK_groupKey_user" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK_Group_GroupStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK_Post_GroupStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK_group_user" ManuallyRouted="false" />
+        <AssociationConnector Association="MlaDatabaseModel.FK_Post_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
