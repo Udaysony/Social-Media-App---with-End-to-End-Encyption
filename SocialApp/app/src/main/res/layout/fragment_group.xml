@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#E6E6E6">
+                <Button
+                    android:id="@+id/cur_groups"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Groups"
+                    android:editable="false"
+                    android:textSize="12sp"
+                    android:clickable="true"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/new_groups_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Search "
+                    android:textSize="12sp"
+                    android:clickable="true"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/new_group_requests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Group Requests"
+                    android:textSize="12sp"
+                    android:clickable="true"
+                    android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+                <FrameLayout
+                    android:id="@+id/groups_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
+
+</LinearLayout>

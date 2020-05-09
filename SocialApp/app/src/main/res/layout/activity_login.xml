@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LoginActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Login"
+        android:maxLines="1"
+        android:editable="false"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+    <EditText
+        android:id="@+id/login_username"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_aprofile"
+        android:hint="username"
+        android:layout_gravity="center_horizontal"
+        android:maxLines="1"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="63dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="password"
+        android:layout_gravity="center_horizontal"
+        android:drawableLeft="@drawable/ic_lock_black"
+        android:maxLines="1"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="114dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="#3FCD3D"
+        android:hint="Login"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="193dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="Not Registered?"
+            tools:layout_editor_absoluteX="121dp"
+            tools:layout_editor_absoluteY="260dp" />
+
+        <TextView
+            android:id="@+id/login_register"
+            android:layout_width="65dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:text="Register"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="121dp"
+            tools:layout_editor_absoluteY="260dp" />
+    </LinearLayout>
+</LinearLayout>

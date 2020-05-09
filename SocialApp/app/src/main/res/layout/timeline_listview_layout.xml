@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/custom_edit_text">
+
+
+    <TextView
+        android:id="@+id/post_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="posts user name"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/post_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/post_user_name"
+        android:text="posts time"
+        android:textAlignment="textEnd"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/post_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/post_user_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="text"/>
+
+    <Button
+        android:id="@+id/post_like"
+        android:layout_width="24dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/post_text"
+        android:layout_toLeftOf="@id/post_share"
+        android:gravity="right"
+        android:drawableLeft="@drawable/ic_thumb_up_black_24dp"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <Button
+        android:id="@+id/post_share"
+        android:layout_width="25dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/post_text"
+        android:gravity="center"
+        android:drawableLeft="@drawable/ic_share_btn"
+        style="?android:attr/borderlessButtonStyle"/>
+
+
+</RelativeLayout>

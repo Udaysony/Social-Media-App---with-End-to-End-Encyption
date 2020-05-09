@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.RegisterActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hey, Welcome to our community. You can get started by filling this form.
+         \n\n\t\t\t Welcome to the Secure Virtual World! "
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:textSize="15dp"
+        android:editable="false"
+        android:layout_gravity="center_horizontal" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+        <EditText
+        android:id="@+id/register_firstname"
+        android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+            android:hint="First name"
+        android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+        <EditText
+        android:id="@+id/register_lastname"
+        android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Last name"
+        android:maxLines="1"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="63dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+    <EditText
+            android:id="@+id/register_email"
+            android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Email ID"
+            android:maxLines="1"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="121dp"
+            tools:layout_editor_absoluteY="63dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/register_mobile_no"
+                android:layout_width="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Mobile Number"
+                android:maxLines="1"
+                android:inputType="phone"
+                tools:layout_editor_absoluteX="121dp"
+                tools:layout_editor_absoluteY="63dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+    <EditText
+        android:id="@+id/register_username"
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="username"
+        android:maxLines="1"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="63dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+    <EditText
+        android:id="@+id/register_password"
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="password"
+        android:maxLines="1"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="114dp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+    <EditText
+        android:id="@+id/register_confirm_password"
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="confirm password"
+        android:maxLines="1"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="114dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Register"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="193dp" />
+
+    </LinearLayout>
+
+</ScrollView>
+</LinearLayout>

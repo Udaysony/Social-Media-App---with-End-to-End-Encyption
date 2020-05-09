@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+    android:paddingTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/show_image"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_launcher_round" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/username_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/image_layout">
+
+<!--   User Name -->
+        <TextView
+            android:id="@+id/title_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/show_image"
+            android:paddingTop="8dp"
+            android:text="User Name: "/>
+
+
+
+        <TextView
+            android:id="@+id/show_username"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/title_username"
+            android:paddingTop="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/firstname_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username_layout">
+<!--                First Name-->
+        <TextView
+            android:id="@+id/title_firstname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/title_username"
+            android:paddingTop="8dp"
+            android:text="First Name: "/>
+
+        <TextView
+            android:id="@+id/show_firstname"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/title_firstname"
+            android:paddingTop="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lastname_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstname_layout">
+<!--                Last Name-->
+        <TextView
+            android:id="@+id/title_lastname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/show_firstname"
+            android:paddingTop="8dp"
+            android:text="Last Name: "/>
+
+        <TextView
+            android:id="@+id/show_lastname"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/title_username"
+            android:paddingTop="8dp"/>
+
+
+</LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/email_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lastname_layout">
+<!--                Email ID-->
+        <TextView
+            android:id="@+id/title_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="25dp"
+            android:layout_below="@+id/title_lastname"
+            android:paddingTop="8dp"
+            android:text="Emial Id: "/>
+
+                <TextView
+                    android:id="@+id/show_email"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/show_lastname"
+                    android:paddingTop="8dp" />
+
+
+        </LinearLayout>
+</RelativeLayout>

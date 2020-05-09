@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ShowIn="navigation_view">
+
+<group android:checkableBehavior="single">
+    <item android:id="@+id/nav_Profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_user_image"/>
+
+    <item android:id="@+id/nav_Timeline"
+        android:title="Timeline"
+        android:icon="@drawable/ic_timeline"/>
+
+    <item android:id="@+id/nav_friends"
+        android:title="Friends"
+        android:icon="@drawable/ic_group_black_24dp">
+    </item>
+
+    <item android:id="@+id/nav_groups"
+        android:title="Groups"
+        android:icon="@drawable/ic_group_black_24dp"/>
+
+    <item android:id="@+id/logout"
+        android:title="Logout"
+        android:gravity= "bottom"
+        android:icon="@drawable/ic_local_post_office_black_24dp"/>
+</group>
+
+
+</menu>
