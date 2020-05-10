@@ -169,11 +169,11 @@ public class FriendsSearchAdapter extends ArrayAdapter<UserDetails> {
 
         @Override
         protected void onPostExecute(String statusCode){
-            if (statusCode.equals("SENT")) {
-                pd.dismiss();
+            pd.dismiss();
+            if (statusCode != null && statusCode.equals("SENT")) {
+
                 Toast.makeText(getContext(), "Request " + statusCode, Toast.LENGTH_SHORT).show();
             } else {
-                pd.dismiss();
                 Toast.makeText(getContext(), "Error while sending request ...!" + statusCode, Toast.LENGTH_SHORT).show();
 
             }
@@ -185,14 +185,12 @@ public class FriendsSearchAdapter extends ArrayAdapter<UserDetails> {
             Call<String> sendRequest = Api.getClient().addRequest(userDetails);
             try{
                 Response<String> response = sendRequest.execute();
-
                 status = response.body();
-                Log.d("In sending request ", status);
+                Log.d("In sending request ", ""+status);
                 return status;
             }catch(Exception e){
                 e.printStackTrace();
             }
-
             return status;
         }
     }

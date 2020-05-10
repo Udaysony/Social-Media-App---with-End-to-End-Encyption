@@ -88,13 +88,64 @@ namespace MlaWebApi.Controllers
         }
 
         [HttpGet]
-        public List<User> FindFriends(string text)
+        public IQueryable FindFriends(string text, string username)
         {
             using (MlaDatabaseEntities context = new MlaDatabaseEntities())
             {
 
-                var users = context.Users.Where(u => u.username.Contains(text)).ToList();
-                return users;
+                
+
+                var currently_following = context.Group_Table.Where(g => g.username == username &&
+                                         g.isOwner == "no" && g.isFriend == "yes").ToList();
+
+
+                if (text.Equals("All") || text.Equals("all") || text.Equals("ALL"))
+                {
+
+                    var users = context.Users.Where(u => u.username != username)
+                           .Select(u => new
+                           {
+                               username = u.username,
+                               groupname = u.username + "Friends"
+
+                           }).ToList();
+
+                    var result =
+                                 from fnew in users
+                                 from cur in currently_following
+                                 where fnew.groupname != cur.groupname
+                                 select fnew;
+
+                    var result_ = result.ToList();
+
+                    if (result_ == null || !(result_.Any())) return users.AsQueryable();
+                    return result_.AsQueryable();
+
+                }
+
+                else
+                {
+                    var users = context.Users.Where(u => u.username.Contains(text) && u.username != username)
+                        .Select(u => new
+                        {
+                            username = u.username,
+                            groupname = u.username + "Friends"
+
+                        }).ToList();
+
+
+                    var result =
+                                 from fnew in users
+                                 from cur in currently_following
+                                 where fnew.groupname != cur.groupname
+                                 select fnew;
+
+                    var result_ = result.ToList();
+                    if (result_ == null || !(result_.Any())) return users.AsQueryable();
+
+
+                    return result_.AsQueryable();
+                }
             }
         }
 

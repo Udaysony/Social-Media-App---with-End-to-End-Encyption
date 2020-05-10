@@ -47,6 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -82,7 +83,6 @@ public class TimelineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        final HomeScreen
 //        type = Typeface.createFromAsset(activity.getAssets(), "fonts/book.TTF");
-
 
         myFragementView = inflater.inflate(R.layout.fragment_timeline, container, false);
         post_data = (EditText)myFragementView.findViewById(R.id.share_text);
@@ -183,7 +183,7 @@ public class TimelineFragment extends Fragment {
             }
         });
 
-        searchResults = (ListView)myFragementView.findViewById(R.id.listview_timeline);
+        searchResults = (ListView) myFragementView.findViewById(R.id.recycler_timeline);
 
         GetPostsAPI getPostsapi = new GetPostsAPI(getContext());
         getPostsapi.execute();
@@ -247,6 +247,7 @@ public class TimelineFragment extends Fragment {
     class GetPostsAPI extends AsyncTask<Void, Void , List<PostDetails>> {
         Context context;
         PostDetails postDetails = new PostDetails();
+        boolean first = true;
 
 //        ProgressDialog pd;
 
@@ -267,12 +268,11 @@ public class TimelineFragment extends Fragment {
 
         @Override
         protected void onPostExecute(List<PostDetails> postDetails) {
-            super.onPostExecute(postDetails);
 
             if(postDetails != null){
 //                pd.dismiss();
-                searchResults.setAdapter(new TimelineAdapter(getActivity(),1, postDetails ));
-
+                    searchResults.setAdapter(new TimelineAdapter(getActivity(), postDetails));
+                    first = false;
             }
             else{
                 Log.d("TAG", "Post Execute is NULL");
@@ -284,7 +284,7 @@ public class TimelineFragment extends Fragment {
         protected List<PostDetails> doInBackground(Void... voids) {
             // Get the rquired Data
             UserDetails register = new UserDetails();
-            Call<List<PostDetails>> callFriends = Api.getClient().getPosts();
+            Call<List<PostDetails>> callFriends = Api.getClient().getPosts(current_username);
             try {
                 Response<List<PostDetails>> responseFriends = callFriends.execute();
                 if (responseFriends.isSuccessful() && responseFriends.body() != null) {
@@ -313,6 +313,12 @@ public class TimelineFragment extends Fragment {
         public PutPostAPI(Context x) {ctx = x;}
         @Override
         protected void onPreExecute() {
+            pd = new ProgressDialog(getActivity());
+            pd.setCancelable(false);
+            pd.setMessage("Posting...");
+            pd.getWindow().setGravity(Gravity.CENTER);
+            pd.show();
+
             Log.d("Post upload", "pre");
             // post_data_text => encrypt with session key
             byte[] session_key = new byte[1000];
@@ -442,11 +448,7 @@ public class TimelineFragment extends Fragment {
                 post.setPrivacy(PostSharePrivacy);
             }
             Log.d("Post upload", "pre done");
-            pd = new ProgressDialog(getActivity());
-            pd.setCancelable(false);
-            pd.setMessage("Posting...");
-            pd.getWindow().setGravity(Gravity.CENTER);
-            pd.show();
+
         }
 
         @Override
@@ -571,7 +573,7 @@ public class TimelineFragment extends Fragment {
         protected void onPreExecute() {
             pd = new ProgressDialog(getActivity());
             pd.setCancelable(false);
-            pd.setMessage("Fetching All Group data...");
+            pd.setMessage("Fetching data...");
             pd.getWindow().setGravity(Gravity.CENTER);
             pd.show();
         }

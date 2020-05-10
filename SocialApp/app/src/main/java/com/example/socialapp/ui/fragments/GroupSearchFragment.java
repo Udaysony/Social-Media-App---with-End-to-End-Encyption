@@ -3,6 +3,7 @@ package com.example.socialapp.ui.fragments;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class GroupSearchFragment extends Fragment {
     //    Typeface type;
     ListView searchResults;
     String found = "N";
+    private String current_username;
 
     ArrayList<GroupDetails> GroupResults = new ArrayList<GroupDetails>();
 
@@ -45,6 +47,8 @@ public class GroupSearchFragment extends Fragment {
 //        final HomeScreen
 //        type = Typeface.createFromAsset(activity.getAssets(), "fonts/book.TTF");
         myFragementView = inflater.inflate(R.layout.fragment_group_search, container, false);
+        SharedPreferences pref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        current_username = pref.getString("username", "none");
 
         search = (SearchView) myFragementView.findViewById(R.id.group_search_text);
         search.setQueryHint("Enter text here ");
@@ -69,7 +73,7 @@ public class GroupSearchFragment extends Fragment {
                     searchResults.setVisibility(myFragementView.VISIBLE);
                     Log.d("trigure api", "here");
                     GetGroupsAPI getGroups = new GetGroupsAPI(getContext());
-                    getGroups.execute(newText);
+                    getGroups.execute(newText, current_username);
                 } else {
                     searchResults.setVisibility(myFragementView.INVISIBLE);
                 }
@@ -113,7 +117,7 @@ public class GroupSearchFragment extends Fragment {
 
         @Override
         protected List<GroupDetails> doInBackground(String... params) {
-            Call<List<GroupDetails>> callFriends = Api.getClient().getGroups(params[0]);
+            Call<List<GroupDetails>> callFriends = Api.getClient().getGroups(params[0], params[1]);
             try {
                 Response<List<GroupDetails>> responseFriends = callFriends.execute();
                 if (responseFriends.isSuccessful() && responseFriends.body() != null) {

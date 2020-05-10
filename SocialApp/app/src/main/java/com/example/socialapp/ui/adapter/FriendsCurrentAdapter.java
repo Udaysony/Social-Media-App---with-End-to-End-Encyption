@@ -69,7 +69,7 @@ public class FriendsCurrentAdapter extends ArrayAdapter<GroupDetails> {
     }
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 
         final ViewHolder holder;
         final GroupDetails tempUser = friendList.get(position);
@@ -78,20 +78,9 @@ public class FriendsCurrentAdapter extends ArrayAdapter<GroupDetails> {
             convertView = mInflater.inflate(R.layout.current_friends_listview_layout,null);
             holder = new ViewHolder();
             holder.user_name = (TextView) convertView.findViewById(R.id.found_current_user_name);
-            holder.remove_btn = (Button)convertView.findViewById(R.id.remove_friend);
+
             convertView.setTag((holder));
 
-            holder.remove_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    gid = tempUser.getgroupid();
-                    gname = tempUser.getgroupname();
-                    user_name = tempUser.getUserName();
-                    Log.d("Removing Group ", gname);
-
-                    new RemoveGroupAPI(getContext()).execute();
-                }
-            });
         }
         else{
             holder = (ViewHolder)convertView.getTag();

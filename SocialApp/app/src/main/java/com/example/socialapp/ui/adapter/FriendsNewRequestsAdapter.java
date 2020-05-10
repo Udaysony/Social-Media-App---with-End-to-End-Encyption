@@ -20,6 +20,7 @@ import com.example.socialapp.models.GroupInvitationDetails;
 import com.example.socialapp.models.GroupKeyDetails;
 import com.example.socialapp.models.UserDetails;
 import com.example.socialapp.ui.activity.RegisterActivity;
+import com.example.socialapp.ui.fragments.FriendsRequestsFragment;
 import com.example.socialapp.utils.Security_Key_message;
 import com.example.socialapp.webservice.Api;
 
@@ -77,7 +78,7 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
     }
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 
         final ViewHolder holder;
         current_username = pref.getString("username" , "no");
@@ -103,6 +104,10 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
 
                     Log.d("Request", holder.user_name.getText().toString());
                     Toast.makeText(getContext(), "Accepted" , Toast.LENGTH_SHORT);
+                    friendList.remove(position);
+                    notifyDataSetChanged();
+
+
                 }
             });
 
@@ -112,6 +117,9 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
                     new_user = holder.user_name.getText().toString();
                     Log.d("Not accept Request", "click");
                     new RemoveInvitation(getContext()).execute( current_username , new_user, tempUser.getGroupname());
+                    friendList.remove(position);
+                    notifyDataSetChanged();
+
 
                 }
             });
@@ -192,8 +200,9 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
         @Override
         protected void onPostExecute(String s)
         {
-            Log.d("Result of Request ACCEPT: ", s);
             pd.dismiss();
+            Log.d("Result of Request ACCEPT: ", s);
+
         }
 
         @Override

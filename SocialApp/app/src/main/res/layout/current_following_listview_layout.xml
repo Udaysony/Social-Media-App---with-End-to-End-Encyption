@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/found_current_user_image"
+        android:id="@+id/found_current_follower_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,16 +18,27 @@
         android:src="@drawable/ic_user_image"/>
 
     <TextView
-        android:id="@+id/found_current_user_name"
+        android:id="@+id/found_current_follower_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/found_current_user_image"
+        android:layout_toRightOf="@+id/found_current_follower_image"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="90dp"
         android:text="User Name"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
+    <Button
+        android:id="@+id/remove_friend_follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignEnd="@id/found_current_follower_name"
+        android:text="Remove"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:clickable="true"
+        android:gravity="center"/>
 
 
 </RelativeLayout>

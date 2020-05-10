@@ -15,20 +15,22 @@ import androidx.fragment.app.FragmentManager;
 
 public class FriendsFragment extends Fragment {
     View myFragementView;
-    Button cur_fr;
+    Button cur_followers;
+    Button cur_followings;
     Button friend_reqs;
     Button search_fr;
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragementView = inflater.inflate(R.layout.fragment_friends, container, false);
-        cur_fr = (Button)myFragementView.findViewById(R.id.cur_friends);
+        cur_followers = (Button)myFragementView.findViewById(R.id.cur_friends);
+        cur_followings = (Button)myFragementView.findViewById(R.id.cur_friends_with);
         search_fr = (Button)myFragementView.findViewById(R.id.new_friends_search);
         friend_reqs = (Button)myFragementView.findViewById(R.id.new_friends_requests);
 
 
 
-        cur_fr.setOnClickListener(new View.OnClickListener() {
+        cur_followers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getChildFragmentManager();
@@ -36,6 +38,15 @@ public class FriendsFragment extends Fragment {
                 fm.beginTransaction().add(R.id.friends_fragment,fragment).commit();
             }
 
+        });
+
+        cur_followings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getChildFragmentManager();
+                FriendsFollowingFragment fragment = new FriendsFollowingFragment();
+                fm.beginTransaction().add(R.id.friends_fragment,fragment).commit();
+            }
         });
 
         search_fr.setOnClickListener(new View.OnClickListener() {

@@ -86,7 +86,7 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
     @SuppressLint("SetTextI18n")
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 
         final ViewHolder holder;
         final GroupInvitationDetails tempUser = groupList.get(position);
@@ -98,6 +98,7 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
             holder = new ViewHolder();
             holder.user_name = (TextView) convertView.findViewById(R.id.new_group_user_name);
             holder.accept_join = (Button) convertView.findViewById(R.id.accept_in_group);
+            holder.remove_btn = (Button) convertView.findViewById(R.id.not_accepted_in_group);
             convertView.setTag((holder));
 
             holder.accept_join.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +111,26 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
                     group_name_ = tempUser.getGroupname();
                     Log.d("Request", "Accept click");
                     new GetPublicKeyofUser(getContext()).execute(new_user);
+
+                    groupList.remove(position);
+                    notifyDataSetChanged();
+
+                }
+            });
+
+            holder.remove_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new_user = tempUser.getUsername_from();
+                    Log.d("RequestAccept", ""+new_user);
+                    gid = tempUser.getGroupid();
+                    group_owner = tempUser.getUsername_to();
+                    group_name_ = tempUser.getGroupname();
+                    Log.d("Request", "Reject click");
+                    new RemoveInvitation(getContext()).execute(group_owner, new_user, group_name_);
+
+                    groupList.remove(position);
+                    notifyDataSetChanged();
 
                 }
             });
@@ -126,6 +147,7 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
     static class ViewHolder{
         TextView user_name;
         Button accept_join;
+        Button remove_btn;
     }
     // on join press
 
@@ -278,4 +300,41 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
             return "NO kry Fetched";
         }
     }
+    class RemoveInvitation extends AsyncTask<String, Void, String>{
+        Context ctx;
+
+        public RemoveInvitation(Context x){ctx=x;}
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(s.equals("ok")){
+                Log.d("Removed friend request" , "ok");
+            }
+            else{
+                Log.d("Something is wrong", "Could not remove friend request " + s);
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Call<String> call_ = Api.getClient().removeInvitation(strings[0], strings[1], strings[2]);
+
+            try {
+                Response<String> resp = call_.execute();
+                Log.d("Removed friend request" , "in background");
+                return resp.body();
+            } catch (IOException e) {
+                Log.d("Removed friend request" , "Exception ");
+                e.printStackTrace();
+            }
+            Log.d("Removed friend request" , "out");
+            return "faild out";
+        }
+    }
+
 }

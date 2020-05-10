@@ -1,9 +1,11 @@
 package com.example.socialapp.ui.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,12 +57,12 @@ public class TimelineAdapter extends ArrayAdapter<PostDetails> {
     private HashMap<String,String> group_key_has = new HashMap<String, String>();
     Security_Key_message key_helper = new Security_Key_message();
     SharedPreferences pref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+    ProgressDialog pd;
 
 
 
-
-    public TimelineAdapter(@NonNull Context context, int x, List<PostDetails>  posts) {
-        super(context, x, posts);
+    public TimelineAdapter(@NonNull Context context, List<PostDetails>  posts) {
+        super(context, 0, posts);
         mInflater = LayoutInflater.from(context);
         this.postsList = posts;
         this.mContext = context;
@@ -89,6 +91,11 @@ public class TimelineAdapter extends ArrayAdapter<PostDetails> {
 
         final ViewHolder holder;
         current_username = pref.getString("username", "None");
+        pd = new ProgressDialog(getContext());
+        pd.setCancelable(false);
+        pd.setMessage("Loading data...");
+        pd.getWindow().setGravity(Gravity.CENTER);
+        pd.show();
 
         try {
             KeyStore ks = KeyStore.getInstance("AndroidKeyStore");
@@ -134,27 +141,32 @@ public class TimelineAdapter extends ArrayAdapter<PostDetails> {
         }
         else{
             holder = (ViewHolder) convertView.getTag();
+            convertView.setTag(holder);
         }
+
 
         holder.user_name.setText(tempUser.getOwnerusername());
         Log.d("Decoding ", "POSTS");
         String  error_ = "Start ";
         // Get group key for gid and username
         grp_id = tempUser.getGroupid();
-        // start decrypting process
+//         start decrypting process
         if (group_key_has.containsKey(String.valueOf(grp_id))){
             group_key = group_key_has.get(String.valueOf(grp_id));
+            Log.d("PostDecode", "Got Group key form Dictionary" + " " + group_key);
         }
         else{
             try {
                 group_key = new GetGroupKey(getContext()).execute().get(); // to get over with Async task of fetching group key and continueing the rest of the code
+                group_key_has.put(String.valueOf(grp_id), group_key);
+                Log.d("PostDecode", "Got Group key form database" + " " + group_key);
+
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        Log.d("PostDecode", "Got Group key form database" + " " + group_key);
         //Got the post Text
         String encrypted_post_text = tempUser.getPostText();
         String encrypted_session_key = tempUser.getSessionKey();
@@ -197,7 +209,7 @@ public class TimelineAdapter extends ArrayAdapter<PostDetails> {
         String timestampAsString = tempUser.getTimestamp().toString();
         Log.d("Timestamp", timestampAsString);
         holder.post_time.setText(timestampAsString);
-
+        pd.dismiss();
 //        holder.user_name.setTypeface(type);
 //        holder.user_name.setText(tempUser.getUserName());
 //        holder.add_friend.setTypeface(type);
@@ -228,7 +240,6 @@ public class TimelineAdapter extends ArrayAdapter<PostDetails> {
 //                new_user_public_key ;
                 Log.d("Request Accept Got group Keys", s);
                 group_key = s;
-                group_key_has.put(String.valueOf(grp_id), s);
 
             }
             Log.d("Request Accept Something wrong with response", ""+s);

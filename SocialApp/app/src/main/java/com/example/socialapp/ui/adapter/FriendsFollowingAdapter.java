@@ -2,6 +2,7 @@ package com.example.socialapp.ui.adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,10 +25,10 @@ import androidx.annotation.NonNull;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
+public class FriendsFollowingAdapter extends ArrayAdapter<GroupDetails> {
 
     private LayoutInflater mInflater;
-    private List<GroupDetails> groupList; //used for the search bar
+    private List<GroupDetails> friendList; //used for the search bar
     private int count;
     //    Typeface type;
     private Context mContext;
@@ -35,11 +36,13 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
     private String gname;
     private String user_name;
 
+    SharedPreferences pref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE); // 0 - for private mode
 
-    public GroupCurrentAdapter(@NonNull Context context, int x, List<GroupDetails>  users) {
+
+    public FriendsFollowingAdapter(@NonNull Context context, int x, List<GroupDetails>  users) {
         super(context,x, users);
         mInflater = LayoutInflater.from(context);
-        this.groupList = users;
+        this.friendList = users;
         this.mContext = context;
 //        SharedPreferences pref = get
 //        Log.d("Username with pref: ", pref.getString("username", "None"));
@@ -48,13 +51,13 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return groupList.size();
+        return friendList.size();
     }
 
     @Override
     public GroupDetails getItem(int position) {
         // TODO Auto-generated method stub
-        return groupList.get(position);
+        return friendList.get(position);
     }
 
     @Override
@@ -67,13 +70,13 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
     public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 
         final ViewHolder holder;
-        final GroupDetails tempUser = groupList.get(position);
-//        Log.d("TAG_Current_Group_Adapter", tempUser.getUserName().toString());
+        final GroupDetails tempUser = friendList.get(position);
+        Log.d("TAG_Current_Friends_Adapter", tempUser.getUserName().toString());
         if(convertView == null){
-            convertView = mInflater.inflate(R.layout.groups_listview_layout,null);
+            convertView = mInflater.inflate(R.layout.current_following_listview_layout,null);
             holder = new ViewHolder();
-            holder.user_name = (TextView) convertView.findViewById(R.id.found_group_name);
-            holder.remove_btn = (Button)convertView.findViewById(R.id.remove_group);
+            holder.user_name = (TextView) convertView.findViewById(R.id.found_current_follower_name);
+            holder.remove_btn = (Button)convertView.findViewById(R.id.remove_friend_follower);
             convertView.setTag((holder));
 
             holder.remove_btn.setOnClickListener(new View.OnClickListener() {
@@ -82,9 +85,11 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
                     gid = tempUser.getgroupid();
                     gname = tempUser.getgroupname();
                     user_name = tempUser.getUserName();
+                    Log.d("Removing Group ", gname);
+
                     new RemoveGroupAPI(getContext()).execute();
 
-                    groupList.remove(position);
+                    friendList.remove(position);
                     notifyDataSetChanged();
                 }
             });
@@ -93,7 +98,11 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.user_name.setText(tempUser.getgroupname());
+        int pos = tempUser.getgroupname().indexOf("Friends");
+        if (pos > 0) {
+        holder.user_name.setText(tempUser.getgroupname().substring(0,pos));
+        }
+        else{Toast.makeText(getContext(), "Error While fetching DATA", Toast.LENGTH_SHORT);}
         return convertView;
     }
 
@@ -101,7 +110,6 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
         TextView user_name;
         Button remove_btn;
     }
-
 
     class RemoveGroupAPI extends AsyncTask<Void, Void, String> {
         Context ctx;
@@ -122,7 +130,7 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
         protected void onPostExecute(String s) {
             pd.dismiss();
             if(s.equals("removed")){
-                Toast.makeText(getContext(), "Removed " + gname + " successfully!", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "Removed " + user_name + " successfully!", Toast.LENGTH_SHORT);
                 Log.d("Friend Remove ", "Success");
             }
             else{
@@ -147,6 +155,4 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
             return null;
         }
     }
-
-
 }

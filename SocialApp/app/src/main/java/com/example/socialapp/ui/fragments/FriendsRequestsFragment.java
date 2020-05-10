@@ -55,6 +55,7 @@ public class FriendsRequestsFragment extends Fragment {
 
         reqResults = (ListView) myFragementView.findViewById(R.id.listview_new_friends);
        new GetFriendRequestsAPI(getContext()).execute(searchFor);
+
         return myFragementView;
     }
 //.................................................

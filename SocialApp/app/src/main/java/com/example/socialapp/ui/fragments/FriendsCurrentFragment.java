@@ -162,7 +162,7 @@ public class FriendsCurrentFragment extends Fragment {
         protected List<UserDetails> doInBackground(String... params) {
             // Get the rquired Data
             UserDetails register = new UserDetails();
-            Call<List<UserDetails>> callFriends = Api.getClient().getFriends(params[0]);
+            Call<List<UserDetails>> callFriends = Api.getClient().getFriends(params[0], params[1]);
             try {
                 Response<List<UserDetails>> responseFriends = callFriends.execute();
                 if (responseFriends.isSuccessful() && responseFriends.body() != null) {

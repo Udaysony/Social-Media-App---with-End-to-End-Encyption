@@ -12,30 +12,42 @@ namespace MlaWebApi.Controllers
         public string addRequest(Group_Invitation_Table data)
         {
             string status = "failed";
-            using(MlaDatabaseEntities context = new MlaDatabaseEntities())
+            using (MlaDatabaseEntities context = new MlaDatabaseEntities())
             {
-                try
+                var already_exists = context.Group_Invitation_Table.SingleOrDefault(u => u.username_from == data.username_from
+                                                                              && u.groupid == data.groupid);
+
+                if (already_exists is null)
                 {
 
-                    if (data == null)
+                    try
                     {
-                        return "its null";
+
+                        if (data == null)
+                        {
+                            return "its null";
+                        }
+                        context.Group_Invitation_Table.Add(data);
+                        if (context.SaveChanges() > 0)
+                        {
+                            status = "SENT";
+                            return status;
+                        }
+                        else
+                        {
+                            status = "failed in save";
+                            return status;
+                        }
                     }
-                    context.Group_Invitation_Table.Add(data);
-                    if (context.SaveChanges() > 0)
+                    catch (Exception e)
                     {
-                        status = "SENT";
-                        return status;
-                    }
-                    else
-                    {
+                        status = e.ToString();
                         return status;
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    status = e.ToString();
-                    return status;
+                    return "SENT";
                 }
             }
 

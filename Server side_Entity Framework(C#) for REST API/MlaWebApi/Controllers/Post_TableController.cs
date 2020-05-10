@@ -20,6 +20,23 @@ namespace MlaWebApi.Controllers
             }
         }
 
+        [HttpGet]
+        public IQueryable GetMyPosts(string username)
+        {
+            using (MlaDatabaseEntities context = new MlaDatabaseEntities())
+            {
+
+                var query =
+                    from posts in context.Post_Table
+                    from groups in context.Group_Table.Where(t => t.username == username)
+                    where groups.groupid == posts.groupid select posts;
+
+                var result = query.ToList();
+
+                return result.AsQueryable();
+            }
+        }
+
         [HttpPost]
         public string uploadPost(Post_Table post_table)
         {

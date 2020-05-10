@@ -28,7 +28,7 @@ public interface APIInterface {
 //    Call<String> addAdmin(@Query("username") String username, @Query("password") String password, @Query("emailid") String emailid,@Query("firstname") String firstname, @Query("lastname") String lastname, @Query("mobile") String mobile);
 
     @GET("api/User/FindFriends")
-    Call<List<UserDetails>> getFriends(@Query("text") String text);
+    Call<List<UserDetails>> getFriends(@Query("text") String text, @Query("username") String username);
 
     @GET("api/User/GetPublicKey")
     Call<String> getUserPublicKey(@Query("username") String username);
@@ -60,8 +60,12 @@ public interface APIInterface {
     @GET("api/Group_Table/GetCurrentFriends")
     Call<List<GroupDetails>> getCurrentFriends(@Query("uname") String x, @Query("gname") String y);
 
+    @GET("api/Group_Table/GetCurrentFriendsFollowing")
+    Call<List<GroupDetails>> getCurrentFriendsFollowing(@Query("uname") String username);
+
+
     @GET("api/Group_Table/getAllGroups")
-    Call<List<GroupDetails>> getGroups(@Query("text") String text);
+    Call<List<GroupDetails>> getGroups(@Query("text") String text, @Query("username") String username);
 
     @GET("api/Group_Table/GetCurrentGroups")
     Call<List<GroupDetails>> getCurrentGroups(@Query("uname") String text);
@@ -90,8 +94,8 @@ public interface APIInterface {
     @GET("api/Group_Status_Table/GetAllGroupInfo")
     Call<List<GroupStatusDetails>> getAllGroupInfo();
 
-    @GET("api/Post_Table/GetAllPosts")
-    Call<List<PostDetails>> getPosts();
+    @GET("api/Post_Table/GetMyPosts")
+    Call<List<PostDetails>> getPosts(@Query("username") String user);
 
     @POST("api/Post_Table/uploadPost")
     Call<String> PutPost(@Body PostDetails post);

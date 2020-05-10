@@ -37,6 +37,7 @@ public class FriendsSearchFragment extends Fragment {
     ListView searchResults;
     String found = "N";
     private int grp_id;
+    private String current_username;
 
     ArrayList<UserDetails> FriendResults = new ArrayList<UserDetails>();
 
@@ -47,11 +48,11 @@ public class FriendsSearchFragment extends Fragment {
 //        final HomeScreen
 //        type = Typeface.createFromAsset(activity.getAssets(), "fonts/book.TTF");
         myFragementView = inflater.inflate(R.layout.fragment_friends_search, container, false);
+        SharedPreferences pref = (getContext()).getSharedPreferences("MyPref", Context.MODE_PRIVATE );
+        current_username = pref.getString("username", "no");
+
         search = (SearchView) myFragementView.findViewById(R.id.friend_search_text);
         search.setQueryHint("Search for new Friends... ");
-
-        SharedPreferences pref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String searchFor = pref.getString("username", "None");
 
         searchResults = (ListView) myFragementView.findViewById(R.id.listview_friends);
         search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
@@ -73,7 +74,7 @@ public class FriendsSearchFragment extends Fragment {
                     searchResults.setVisibility(myFragementView.VISIBLE);
                     Log.d("trigure api", "here");
                     GetFriendsAPI getFriends = new GetFriendsAPI(getContext());
-                    getFriends.execute(newText);
+                    getFriends.execute(newText, current_username);
                 } else {
                     searchResults.setVisibility(myFragementView.INVISIBLE);
                     // call api to get all current friends
@@ -122,7 +123,7 @@ public class FriendsSearchFragment extends Fragment {
         protected List<UserDetails> doInBackground(String... params) {
             // Get the rquired Data
 
-            Call<List<UserDetails>> callFriends = Api.getClient().getFriends(params[0]);
+            Call<List<UserDetails>> callFriends = Api.getClient().getFriends(params[0], params[1]);
             try {
                 Response<List<UserDetails>> responseFriends = callFriends.execute();
                 if (responseFriends.isSuccessful() && responseFriends.body() != null) {

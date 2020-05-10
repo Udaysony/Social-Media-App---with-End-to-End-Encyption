@@ -105,15 +105,55 @@ namespace MlaWebApi.Controllers
         }
 
         [HttpGet]
-        public List<Group_Table> getAllGroups(string text)
+        public List<Group_Table> getAllGroups(string text, string username)
         {
             using(MlaDatabaseEntities context = new MlaDatabaseEntities())
             {
-                var gps = context.Group_Table.Where(g => g.groupname.Contains(text) && g.isOwner =="yes"
-                && g.isFriend=="No").ToList();
+                var current = context.Group_Table.Where(g => g.username == username && g.isFriend == "no").ToList();
+
+                if (text.Equals("All") || text.Equals("all") || text.Equals("ALL"))
+                {
+
+                    var gps = context.Group_Table.Where(g => g.username != username && g.isOwner == "yes"
+                                                            && g.isFriend == "no" ).ToList();
+
+                    return gps;
+
+                }
+
+                else
+                {
+                    var gps = context.Group_Table.Where(g => g.groupname.Contains(text) && g.username != username && g.isOwner=="yes"
+                                    && g.isFriend == "no").ToList();
+
+                    return gps;
+                    var result = from new_g in gps
+                                 join p in current
+                                 on new_g.groupname equals p.groupname
+                                 select new_g;
+
+                    var result_ = result.ToList();
+
+                    if (!(result_.Any())) return gps;
+
+                    return result_;
+                }
+
+
+            }
+        }
+
+        [HttpGet]
+        public List<Group_Table> getSearchNewFriends(string text, string owner)
+        {
+            using (MlaDatabaseEntities context = new MlaDatabaseEntities())
+            {
+                var gps = context.Group_Table.Where(g => g.groupname.Contains(text) && g.isOwner == "yes"
+                && g.isFriend == "no").ToList();
                 return gps;
             }
         }
+
 
         [HttpGet]
         public Group_Table getGroupId(string uname, string gname)
@@ -131,6 +171,17 @@ namespace MlaWebApi.Controllers
             {
                 var names = context.Group_Table.Where(g => g.groupname == gname && g.username != uname).ToList();
                 return names;
+            }
+        }
+
+        [HttpGet]
+        public List<Group_Table> GetCurrentFriendsFollowing(string uname)
+        {
+            using (MlaDatabaseEntities context = new MlaDatabaseEntities())
+            {
+                var gps = context.Group_Table.Where(g => g.username == uname &&
+                                        g.isOwner == "no" && g.isFriend == "yes").ToList();
+                return gps;
             }
         }
 
