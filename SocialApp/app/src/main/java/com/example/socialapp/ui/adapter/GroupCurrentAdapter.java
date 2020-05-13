@@ -31,7 +31,7 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
     private int count;
     //    Typeface type;
     private Context mContext;
-    private int gid;
+    private int gid,vid;
     private String gname;
     private String user_name;
 
@@ -122,12 +122,13 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
         protected void onPostExecute(String s) {
             pd.dismiss();
             if(s.equals("removed")){
-                Toast.makeText(getContext(), "Removed " + gname + " successfully!", Toast.LENGTH_SHORT);
+//                Toast.makeText(getContext(), "Removed " + gname + " successfully!", Toast.LENGTH_SHORT);
                 Log.d("Friend Remove ", "Success");
+//                new UpdateStatusTodirty(ctx).execute();
             }
             else{
-                Toast.makeText(getContext(), "Remove Error", Toast.LENGTH_SHORT);
-                Log.d("Friend Remove ", "error");
+//                Toast.makeText(getContext(), "Remove Error", Toast.LENGTH_SHORT);
+                Log.d("Friend Remove ", "error" + s);
             }
         }
 
@@ -147,6 +148,43 @@ public class GroupCurrentAdapter extends ArrayAdapter<GroupDetails> {
             return null;
         }
     }
+
+//    class UpdateStatusTodirty extends AsyncTask<Void, Void, String>{
+//        Context ctx;
+//
+//        public UpdateStatusTodirty(Context x){ctx=x;}
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            if(s.equals("ok")){
+//                Log.d("Version updated to dirty  ", "o");
+//            }
+//            else{
+//                Log.d("Version update dirty problem ", s);
+//            }
+//        }
+//
+//        @Override
+//        protected String doInBackground(Void... voids) {
+//            Call<String> call_ = Api.getClient().updateStatusdirty(gid);
+//
+//            try {
+//                Response<String> resp = call_.execute();
+//                Log.d("Version updated to dirty  ", "in background");
+//                return resp.body();
+//            } catch (IOException e) {
+//                Log.d("Version updated to dirty  ", "Exception");
+//                e.printStackTrace();
+//            }
+//            Log.d("Version updated to dirty  ", "Out");
+//            return null;
+//        }
+//    }
 
 
 }

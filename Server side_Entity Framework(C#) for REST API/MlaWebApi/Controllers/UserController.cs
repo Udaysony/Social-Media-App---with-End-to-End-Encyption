@@ -32,7 +32,7 @@ namespace MlaWebApi.Controllers
 
                     Group_Table gt = new Group_Table
                     {
-                        username = user.username,
+                        username = user.username,   
                         groupid = gst.groupid,
                         groupname = gst.groupname,
                         isFriend = "yes",

@@ -189,3 +189,40 @@ C:\Users\Uday\Downloads\258\.NET Server Project\jinsongo-mla-server-d05b9a4780cf
 C:\Users\Uday\Downloads\258\.NET Server Project\jinsongo-mla-server-d05b9a4780cf\MlaWebApi\obj\Release\MlaWebApi.dll
 C:\Users\Uday\Downloads\258\.NET Server Project\jinsongo-mla-server-d05b9a4780cf\MlaWebApi\obj\Release\MlaWebApi.pdb
 C:\Users\Uday\Downloads\258\.NET Server Project\jinsongo-mla-server-d05b9a4780cf\MlaWebApi\obj\Release\MlaWebApi.csprojAssemblyReference.cache
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\App_Data\MlaDatabase.sdf
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\MlaWebApi.dll.config
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\MlaWebApi.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\MlaWebApi.pdb
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\Antlr3.Runtime.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\EntityFramework.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\EntityFramework.SqlServer.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\Newtonsoft.Json.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Net.Http.Formatting.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Helpers.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Http.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Http.WebHost.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Mvc.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Optimization.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Providers.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Razor.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.WebPages.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.WebPages.Razor.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\WebGrease.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\EntityFramework.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\EntityFramework.SqlServer.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\Newtonsoft.Json.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Net.Http.Formatting.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Helpers.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Http.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Http.WebHost.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Mvc.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.Razor.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.WebPages.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\bin\System.Web.WebPages.Razor.xml
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\obj\Release\MlaWebApi.csprojAssemblyReference.cache
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\obj\Release\MlaWebApi.csproj.CopyComplete
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\obj\Release\MlaWebApi.dll
+C:\Users\Uday\Documents\GitHub\Social-Media-App---with-End-to-End-Encyption\Server side_Entity Framework(C#) for REST API\MlaWebApi\obj\Release\MlaWebApi.pdb

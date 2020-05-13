@@ -33,7 +33,11 @@ namespace MlaWebApi.Controllers
 
                 var result = query.ToList();
 
-                return result.AsQueryable();
+                var public_post = context.Post_Table.Where(p => p.privacy == "Public" && p.ownerusername != username).ToList();
+
+                var final_result = result.Union(public_post).OrderByDescending(g => g.timestamp);
+
+                return final_result.AsQueryable();
             }
         }
 

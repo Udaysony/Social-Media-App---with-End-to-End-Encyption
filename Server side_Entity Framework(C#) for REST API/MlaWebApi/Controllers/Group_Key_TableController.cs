@@ -29,12 +29,12 @@ namespace MlaWebApi.Controllers
                     };
                     context.Group_Table.Add(group_table);
 
- 
-                        var rawToRemove = context.Group_Invitation_Table.Single(t => t.username_from == group_key_table.username
-                                    && t.username_to == owner && t.groupid == group_key_table.groupid);
 
-                        context.Group_Invitation_Table.Remove(rawToRemove);
-   
+                    var rawToRemove = context.Group_Invitation_Table.Single(t => t.username_from == group_key_table.username
+                                && t.username_to == owner && t.groupid == group_key_table.groupid);
+
+                    context.Group_Invitation_Table.Remove(rawToRemove);
+
                     if (context.SaveChanges() > 0)
                     {
                         query_result = "ok";
@@ -79,12 +79,12 @@ namespace MlaWebApi.Controllers
                     context.Group_Table.Add(group_table);
                     s += "group_table_added ";
 
-                        var rawToRemove = context.Group_Invitation_Table.Single(t => t.username_from == group_key_table.username
-                                    && t.username_to == owner 
-                                    && t.groupid == group_key_table.groupid);
+                    var rawToRemove = context.Group_Invitation_Table.Single(t => t.username_from == group_key_table.username
+                                && t.username_to == owner
+                                && t.groupid == group_key_table.groupid);
 
-                        context.Group_Invitation_Table.Remove(rawToRemove);
-                        s += "removed_raw ";
+                    context.Group_Invitation_Table.Remove(rawToRemove);
+                    s += "removed_raw ";
 
                     if (context.SaveChanges() > 0)
                     {
@@ -94,31 +94,75 @@ namespace MlaWebApi.Controllers
                     }
                     else
                     {
-                        return s+query_result;
+                        return s + query_result;
                     }
                 }
                 catch (Exception e)
                 {
-                    query_result = s+  e.ToString();
+                    query_result = s + e.ToString();
                     return query_result;
                 }
             }
 
         }
 
-            [HttpGet]
-            public string GetGroupKey(int gid, string owner)
-            {
+        [HttpGet]
+        public string GetGroupKey(int gid, int vn, string owner)
+        {
             string gk = "";
 
-                using (MlaDatabaseEntities context = new MlaDatabaseEntities())
+            using (MlaDatabaseEntities context = new MlaDatabaseEntities())
+            {
+
+                if (vn == 0)
+                {
+                    var raws = context.Group_Key_Table.Where(g => g.groupid == gid && g.username == owner).ToList();
+
+                    int Maxvn = raws.Max(r => r.version_num);
+
+                    var k2 = context.Group_Key_Table.Single(u => u.groupid == gid && u.version_num == Maxvn && u.username == owner);
+                    gk = k2.groupKey;
+                    return gk;
+                }
+                else
                 {
 
-                    var k1 = context.Group_Key_Table.Single(u => u.groupid == gid && u.username == owner);
+                    var k1 = context.Group_Key_Table.Single(u => u.groupid == gid && u.version_num == vn && u.username == owner);
                     gk = k1.groupKey;
                     return gk;
 
                 }
             }
+        }
+
+
+        [HttpGet]
+        public IQueryable GetMyGroupKey(string owner)
+        {
+            //string gk = "";
+
+            using (MlaDatabaseEntities context = new MlaDatabaseEntities())
+            {
+                var gid_war = context.Group_Status_Table.SingleOrDefault(s => s.groupname == owner + "Friends");
+
+                int gid = gid_war.groupid;
+
+                var raws = context.Group_Key_Table.Where(g => g.groupid == gid && g.username == owner).ToList();
+
+                int Maxvn = raws.Max(r => r.version_num);
+
+                var k2 = context.Group_Key_Table.Where(u => u.groupid == gid  && u.version_num == Maxvn
+                                                &&  u.username == owner).
+                    Select(u => new { 
+                    groupid = u.groupid,
+                    version_num = u.version_num,
+                    groupKey = u.groupKey
+                    }).ToList();
+
+                //gk = k2.groupKey;
+                return k2.AsQueryable();
+            }
+        }
     }
+
 }

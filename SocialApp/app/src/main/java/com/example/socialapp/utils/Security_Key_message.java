@@ -59,27 +59,27 @@ public class Security_Key_message {
         return raw;
     }
 
-    public String encypt_keys(SecretKey sk, SecretKey pk) throws Exception
-    {
-        Cipher cipher = null;
-        cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, pk);
-        byte[] raw = cipher.doFinal(sk.getEncoded());
-        return Base64.encodeToString(raw, Base64.DEFAULT);
-    }
+//    public String encypt_keys(SecretKey sk, SecretKey pk) throws Exception
+//    {
+//        Cipher cipher = null;
+//        cipher = Cipher.getInstance("AES");
+//        cipher.init(Cipher.ENCRYPT_MODE, pk);
+//        byte[] raw = cipher.doFinal(sk.getEncoded());
+//        return Base64.encodeToString(raw, Base64.DEFAULT);
+//    }
 
 
 
-    public  byte[] encrypt(byte[] raw, byte[] clear) throws Exception {
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+    public  byte[] encrypt(byte[] gk, byte[] sess) throws Exception {
+        SecretKeySpec skeySpec = new SecretKeySpec(gk, "AES");
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-        byte[] encrypted = cipher.doFinal(clear);
+        byte[] encrypted = cipher.doFinal(sess);
         return encrypted;
     }
 
-    public  byte[] decrypt(byte[] raw, byte[] encrypted) throws Exception {
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+    public  byte[] decrypt(byte[] gk, byte[] encrypted) throws Exception {
+        SecretKeySpec skeySpec = new SecretKeySpec(gk, "AES");
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.DECRYPT_MODE, skeySpec);
         byte[] decrypted = cipher.doFinal(encrypted);
@@ -104,13 +104,11 @@ public class Security_Key_message {
         return cipherText;
     }
 
-    public static String sign(String plainText, PrivateKey privateKey) throws Exception {
-        Signature privateSignature = Signature.getInstance("MD5withRSA");
+    public String sign(String plainText, PrivateKey privateKey) throws Exception {
+        Signature privateSignature = Signature.getInstance("SHA256withRSA");
         privateSignature.initSign(privateKey);
         privateSignature.update(plainText.getBytes());
-
         byte[] signature = privateSignature.sign();
-
         return java.util.Base64.getEncoder().encodeToString(signature);
     }
 

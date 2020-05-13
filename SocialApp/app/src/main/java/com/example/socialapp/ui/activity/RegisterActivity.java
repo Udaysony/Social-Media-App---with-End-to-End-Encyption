@@ -166,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
                 editor.commit();
 
                 PrivateSecretKey = get_key.getPrivateSecretKey();
-                editor.putString("PrivateSecretKey", PrivateSecretKey.toString());
+                editor.putString("PrivateSecretKey", Base64.getEncoder().encodeToString(PrivateSecretKey));
                 editor.commit();
             } catch (Exception e) {
                 e.printStackTrace();

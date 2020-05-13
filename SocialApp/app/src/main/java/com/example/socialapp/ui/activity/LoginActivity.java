@@ -1,14 +1,12 @@
 package com.example.socialapp.ui.activity;
 
 import android.app.ProgressDialog;
-import android.app.backup.SharedPreferencesBackupHelper;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -17,20 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.socialapp.R;
-import com.example.socialapp.models.Current_Session;
 import com.example.socialapp.models.UserDetails;
-import com.example.socialapp.ui.fragments.FriendsFragment;
 import com.example.socialapp.utils.CommonUtils;
-import com.example.socialapp.utils.Security_Key_message;
 import com.example.socialapp.webservice.Api;
 
 import java.io.IOException;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -40,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     Button login_button;
     TextView text_register;
     UserDetails register;
-    Current_Session cur;
     public byte[] defaultGroupKey;
     public byte[] PrivateSecretKey;
 

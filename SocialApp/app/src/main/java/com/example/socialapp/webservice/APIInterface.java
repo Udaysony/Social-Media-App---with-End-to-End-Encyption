@@ -1,6 +1,5 @@
 package com.example.socialapp.webservice;
 
-import com.example.socialapp.models.BothKeys;
 import com.example.socialapp.models.GroupDetails;
 import com.example.socialapp.models.GroupInvitationDetails;
 import com.example.socialapp.models.GroupKeyDetails;
@@ -17,10 +16,11 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APIInterface {
+
     @GET("api/User/UserAuth")
     Call<List<UserDetails>> authenticate(@Query("username") String username, @Query("password") String password);
 
-    @GET("api/User/GetProfile") //yet to implement
+    @GET("api/User/GetUserInfo") //yet to implement
     Call<List<UserDetails>> getProfile(@Query("username") String username);
 
     @POST("api/User/PostUser") // it will Register Use and populate Group Tables......
@@ -53,7 +53,10 @@ public interface APIInterface {
     Call<String> AcceptGroupRequest(@Body GroupKeyDetails gk,@Query("gname") String gname, @Query("owner") String owner);
 
     @GET("api/Group_Key_Table/GetGroupKey") // Get Key for Group
-    Call<String> getGroupKey(@Query("gid") int gid, @Query("owner") String owner);
+    Call<String> getGroupKey(@Query("gid") int gid, @Query("vn") int vid,@Query("owner") String owner);
+
+    @GET("api/Group_Key_Table/GetMyGroupKey") // Get Key for Group
+    Call<List<GroupKeyDetails>> getMyGroupKey(@Query("owner") String username);
 
 
 
@@ -102,4 +105,22 @@ public interface APIInterface {
 
     @GET("api/Group_Invitation_Table/RemoveRequest")
     Call<String> removeInvitation(@Query("owner") String string, @Query("new_user") String string1,@Query("groupname") String string2);
+
+
+    // Version Handling
+    @GET("api/Version/GetStatusAndDetails")
+    Call<List<UserDetails>> getStatusAndDetails(@Query("gid") int i);
+
+    @GET("api/Version/GetMaxVersion")
+    Call<Integer> getMaxVersion(@Query("gid") int i);
+
+    @POST("api/Version/UpdateStatustoClean")
+    Call<String> updateStatusclean(@Query("gid") int gid);
+
+//    @POST("api/Version/UpdateStatustoDirty")
+//    Call<String> updateStatusdirty(@Query("gid") int gid);
+
+
+    @POST("api/Version/AddNewKeyData")
+    Call<String> AddNewKeyTableData(@Query("username") String string, @Query("gid") String string1, @Query("new_key") String string2, @Query("vn") String string3);
 }

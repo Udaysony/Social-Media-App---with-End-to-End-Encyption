@@ -32,6 +32,7 @@ import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import androidx.annotation.NonNull;
 import retrofit2.Call;
@@ -45,7 +46,7 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
     private Context mContext;
     public String NewUsersPublicKey;
     public String new_user;
-    public int group_id;
+    public int group_id,version_id;
     String current_username;
     SharedPreferences pref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
 
@@ -188,7 +189,7 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
             Log.d("Current Users GroupID: ",String.valueOf(group_id));
             groupKeyDetails.setGroupid(group_id);
             groupKeyDetails.setUsername(new_user);
-            groupKeyDetails.setVersion_num(1); //Get max version_number api
+            groupKeyDetails.setVersion_num(version_id); //Get max version_number api
 
             pd = new ProgressDialog(getContext());
             pd.setCancelable(false);
@@ -231,7 +232,16 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
         protected void onPostExecute(GroupDetails gid) {
             if (gid != null) {
                     group_id = gid.getgroupid();
-                    new GetPublicKeyofUser(mContext).execute(new_user);
+
+                try {
+                    version_id = new GetMaxVersion(getContext()).execute().get(); // to hold code here
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                new GetPublicKeyofUser(mContext).execute(new_user);
             }
             Log.d("Error while in Getting group ID","");
         }
@@ -330,4 +340,45 @@ public class FriendsNewRequestsAdapter extends ArrayAdapter<GroupInvitationDetai
             return "faild out";
         }
     }
+
+
+    class GetMaxVersion extends AsyncTask<Void, Void, Integer>{
+        Context ctx;
+
+        public GetMaxVersion(Context c){ctx = c;}
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Integer vnumber) {
+            if(vnumber != null)
+            {
+                version_id = vnumber;
+                Log.d("Version get", "Success");
+            }
+            else{
+                Log.d("Version get", "Null");
+            }
+        }
+
+        @Override
+        protected Integer doInBackground(Void... strings) {
+            Call<Integer> call_ = Api.getClient().getMaxVersion(group_id);
+
+            try {
+                Response<Integer> resp = call_.execute();
+                Log.d("Version get", "Background");
+                return resp.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d("Version get", "Exception");
+            }
+            Log.d("Version get", "Out");
+            return null;
+        }
+    } // yet to implement API in server =-- DONE
+
 }

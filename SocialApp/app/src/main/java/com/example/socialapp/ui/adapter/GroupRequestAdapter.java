@@ -2,7 +2,6 @@ package com.example.socialapp.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.AbstractThreadedSyncAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -17,8 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.socialapp.R;
-import com.example.socialapp.models.BothKeys;
-import com.example.socialapp.models.GroupDetails;
 import com.example.socialapp.models.GroupInvitationDetails;
 import com.example.socialapp.models.GroupKeyDetails;
 import com.example.socialapp.utils.Security_Key_message;
@@ -27,13 +24,12 @@ import com.example.socialapp.webservice.Api;
 import java.io.IOException;
 import java.security.KeyFactory;
 import java.security.KeyStore;
-import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import androidx.annotation.NonNull;
 import retrofit2.Call;
@@ -47,7 +43,7 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
     private Context mContext;
     private String new_user_public_key;
     private String group_key;
-    private int gid;
+    private int gid, v_id;
     private String new_user;
     private String group_owner;
     private String group_name_;
@@ -109,6 +105,15 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
                     gid = tempUser.getGroupid();
                     group_owner = tempUser.getUsername_to();
                     group_name_ = tempUser.getGroupname();
+
+                    try {
+                        v_id = new GetMaxVersion(getContext()).execute().get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     Log.d("Request", "Accept click");
                     new GetPublicKeyofUser(getContext()).execute(new_user);
 
@@ -188,7 +193,7 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
             groupKeyDetails.setGroupKey(encoded_gk);
             groupKeyDetails.setGroupid(gid); //from MyPref
             groupKeyDetails.setUsername(new_user);
-            groupKeyDetails.setVersion_num(1); //Get max version_number api
+            groupKeyDetails.setVersion_num(v_id); //Get max version_number api
 
             pd = new ProgressDialog(getContext());
             pd.setCancelable(false);
@@ -249,7 +254,7 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
         @Override
         protected String doInBackground(Void... voids) // gid, owner name
         {
-            Call<String> call_ = Api.getClient().getGroupKey(gid, group_owner);
+            Call<String> call_ = Api.getClient().getGroupKey(gid, 0,group_owner);
             try {
                 Response<String> resp = call_.execute();
                 Log.d("Request Got group key","in"+resp.body());
@@ -333,8 +338,48 @@ public class GroupRequestAdapter extends ArrayAdapter<GroupInvitationDetails> {
                 e.printStackTrace();
             }
             Log.d("Removed friend request" , "out");
-            return "faild out";
+            return "failed out";
         }
     }
+
+    class GetMaxVersion extends AsyncTask<Void, Void, Integer>{
+        Context ctx;
+
+        public GetMaxVersion(Context c){ctx = c;}
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Integer vnumber) {
+            if(vnumber != null)
+            {
+                v_id = vnumber;
+                Log.d("Version get", "Success");
+            }
+            else{
+                Log.d("Version get", "Null");
+            }
+        }
+
+        @Override
+        protected Integer doInBackground(Void... strings) {
+            Call<Integer> call_ = Api.getClient().getMaxVersion(gid);
+
+            try {
+                Response<Integer> resp = call_.execute();
+                Log.d("Version get", "Background");
+                return resp.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d("Version get", "Exception");
+            }
+            Log.d("Version get", "Out");
+            return null;
+        }
+    } // yet to implement API in server =-- DONE
+
 
 }

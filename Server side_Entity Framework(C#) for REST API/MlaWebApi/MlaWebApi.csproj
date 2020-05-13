@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Post_TableController.cs" />
     <Compile Include="Controllers\RemoveController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VersionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

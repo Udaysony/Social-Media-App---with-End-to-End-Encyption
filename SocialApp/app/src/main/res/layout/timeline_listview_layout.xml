@@ -17,6 +17,16 @@
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
     <TextView
+        android:id="@+id/post_privacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/post_user_name"
+        android:text="posts privacy"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
         android:id="@+id/post_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -23,7 +23,7 @@ namespace MlaWebApi.Models
         public string privacy { get; set; }
         public string ownerusername { get; set; }
         public Nullable<int> originalpostid { get; set; }
-        public System.DateTime timestamp { get; set; }
+        public DateTime timestamp { get; set; }
     
         public  Group_Status_Table Group_Status_Table { get; set; }
         public  User User { get; set; }
